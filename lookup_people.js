@@ -10,11 +10,22 @@ const client = new pg.Client({
     port: settings.port,
     ssl: settings.ssl
 });
-
 client.connect((err) => {
     if (err) {
         return console.error("Connection Error", err);
-    } else {}
+    }
+    readName();
+});
+//Function to print input name from database
+function getName(result) {
+
+    console.log('Found ' + result.rows.length + ' person(s) by the name ' + "'" + people + "': ");
+    for (let person in result.rows) {
+        console.log('-' + (parseInt(person) + 1) + ': ' + result.rows[person].first_name + ' ' + result.rows[person].last_name + ', ' + result.rows[person].birthdate.toISOString().substr(0, 10));
+    }
+}
+//Function to connect to database and find query
+function readName(result) {
     client.query("SELECT * from famous_people WHERE last_name =  $1::text", people, (err, result) => {
         if (err) {
             return console.error("error running query", err);
@@ -22,12 +33,4 @@ client.connect((err) => {
         getName(result);
         client.end();
     });
-});
-
-function getName(result) {
-
-    console.log('Found ' + result.rows.length + ' person(s) by the name ' + "'" + people + "': ");
-    for (let person in result.rows) {
-        console.log('-' + result.rows[person].id + ': ' + result.rows[person].first_name + ' ' + result.rows[person].last_name + ', ' + result.rows[person].birthdate.toISOString().substr(0, 10));
-    }
 }
