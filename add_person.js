@@ -2,14 +2,12 @@ const settings = require("./settings"); // settings.json
 var knex = require('knex')({
     client: 'pg',
     connection: {
-        user: 'development',
-        password: 'development'
-
+        filename: './settings'
     }
 });
 //Creates a table with given parameters from command line. Returns error if input is empty, then kills connection
 function createTable() {
-    if (!process.argv[2] || !process.argv[2] || !process.argv[2]) {
+    if (!process.argv[2] || !process.argv[3] || !process.argv[4]) {
         console.log("Please input values to insert in the form of: name, last name, birthdate.");
         knex.destroy();
     } else {
