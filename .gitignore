@@ -1,7 +1,0 @@
-*~
-build/
-.lock-wscript
-*.log
-node_modules/
-package-lock.json
-*.swp
