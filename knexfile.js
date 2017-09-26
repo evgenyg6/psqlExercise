@@ -4,9 +4,7 @@ module.exports = {
 
     development: {
         client: 'pg',
-        connection: {
-            filename: './settings'
-        }
+        connection: settings
     },
 
     staging: {

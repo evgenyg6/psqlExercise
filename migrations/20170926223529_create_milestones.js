@@ -1,14 +1,9 @@
 exports.up = function(knex, Promise) {
-    return Promise.all([
-        knex.schema.createTable('famous_people', function(table) {
-            table.string('Description: ');
-            table.string('Date achieved: ');
-            table.timestamps();
-        })
-    ])
+    return knex.schema.createTable("milestones", (table) => {
+        table.string('Description');
+        table.string('Date Achived: ');
+    })
 };
 exports.down = function(knex, Promise) {
-    return Promise.all([
-        knex.schema.dropTable('famous_people');
-    ])
+    return knex.schema.dropTable('milestones');
 };

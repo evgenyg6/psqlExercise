@@ -1,9 +1,8 @@
 const settings = require("./settings"); // settings.json
 var knex = require('knex')({
     client: 'pg',
-    connection: {
-        filename: './settings'
-    }
+    connection: settings
+
 });
 //Creates a table with given parameters from command line. Returns error if input is empty, then kills connection
 function createTable() {
