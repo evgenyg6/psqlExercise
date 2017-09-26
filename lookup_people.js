@@ -14,13 +14,20 @@ const client = new pg.Client({
 client.connect((err) => {
     if (err) {
         return console.error("Connection Error", err);
-    }
+    } else {}
     client.query("SELECT * from famous_people WHERE last_name =  $1::text", people, (err, result) => {
         if (err) {
             return console.error("error running query", err);
         }
-        console.log('Found ' + result.rows.length + ' person(s) by the name ' + "'" + people + "': "); //output: 1
-        console.log(result.rows);
+        getName(result);
         client.end();
     });
 });
+
+function getName(result) {
+
+    console.log('Found ' + result.rows.length + ' person(s) by the name ' + "'" + people + "': ");
+    for (let person in result.rows) {
+        console.log('-' + result.rows[person].id + ': ' + result.rows[person].first_name + ' ' + result.rows[person].last_name + ', ' + result.rows[person].birthdate.toISOString().substr(0, 10));
+    }
+}
