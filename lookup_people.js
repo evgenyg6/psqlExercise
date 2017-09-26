@@ -19,7 +19,8 @@ client.connect((err) => {
         if (err) {
             return console.error("error running query", err);
         }
-        console.log(result.rows); //output: 1
+        console.log('Found ' + result.rows.length + ' person(s) by the name ' + "'" + people + "': "); //output: 1
+        console.log(result.rows);
         client.end();
     });
 });
